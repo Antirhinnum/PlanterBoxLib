@@ -1,0 +1,4 @@
+Planter Box Library eases the creation of Planter Boxes.
+This mod adds no content on its own and is intended to be used by other mods.
+
+An example of using this mod is included on the mod's GitHub.

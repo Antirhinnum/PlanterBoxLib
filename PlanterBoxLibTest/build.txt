@@ -1,0 +1,9 @@
+displayName = Planter Box Library Test
+author = Snek
+version = 1.0.0.0
+modReferences = PlanterBoxLib
+homepage = 
+hideCode = false
+hideResources = false
+includeSource = true
+buildIgnore = .gitattributes, .gitignore, LICENSE, README.md, build.txt, bin/*, obj/*, *.pdn
