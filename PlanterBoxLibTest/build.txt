@@ -6,4 +6,4 @@ homepage =
 hideCode = false
 hideResources = false
 includeSource = true
-buildIgnore = .gitattributes, .gitignore, LICENSE, README.md, build.txt, bin/*, obj/*, *.pdn
+buildIgnore = build.txt, bin/*, obj/*, *.pdn
