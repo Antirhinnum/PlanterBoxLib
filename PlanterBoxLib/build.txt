@@ -1,7 +1,7 @@
 displayName = Planter Box Library
 author = Snek
 version = 1.0.0.0
-homepage = 
+homepage = https://forums.terraria.org/index.php?threads/planter-box-library.110623/
 hideCode = false
 hideResources = false
 includeSource = true
