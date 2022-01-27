@@ -4,6 +4,10 @@ using Terraria.ModLoader;
 
 namespace PlanterBoxLib
 {
+	/// <summary>
+	/// A modded Planter Box item.
+	/// </summary>
+	/// <typeparam name="T">The ModPlanterBox this ModPlanterBoxItem places.</typeparam>
 	public abstract class ModPlanterBoxItem<T> : ModItem where T : ModPlanterBox
 	{
 		public override sealed void SetStaticDefaults()

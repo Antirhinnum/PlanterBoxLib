@@ -6,6 +6,9 @@ namespace PlanterBoxLib.Common.Hooks
 {
 	internal partial class HookLoader
 	{
+		/// <summary>
+		/// Allows herbs to grow in ModPlanterBoxes.
+		/// </summary>
 		private void WorldGen_PlantCheck(ILContext il)
 		{
 			ILCursor c = new(il);

@@ -5,7 +5,7 @@ namespace PlanterBoxLib.Common.Hooks
 	internal partial class HookLoader
 	{
 		/// <summary>
-		/// Allows plants to be placed into ModPlanterBoxes and allowe torches to be placed onto ModPlanterBoxes.
+		/// Allows plants to be placed into ModPlanterBoxes and allows torches to be placed onto ModPlanterBoxes.
 		/// </summary>
 		private void WorldGen_PlaceTile(ILContext il)
 		{
