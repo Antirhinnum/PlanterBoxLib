@@ -56,13 +56,16 @@ namespace PlanterBoxLib.Common.Hooks
 			///		if (tile.active() && IsPlanterBox(tile.type))
 
 			if (!c.TryGotoNext(MoveType.Before,
-					i => i.MatchLdsfld<Main>(nameof(Main.tile)),
+					i => i.MatchLdsflda<Main>(nameof(Main.tile)),
 					i => i.MatchLdarg(0),
 					i => i.MatchLdfld(_SmartCursorUsageInfo.GetField("screenTargetX")),
 					i => i.MatchLdarg(0),
 					i => i.MatchLdfld(_SmartCursorUsageInfo.GetField("screenTargetY")),
 					i => i.MatchCall(out _),
-					i => i.MatchLdfld<Tile>(nameof(Tile.type)),
+					i => i.MatchStloc(1),
+					i => i.MatchLdloca(1),
+					i => i.MatchCall(_Tile_get_type),
+					i => i.MatchLdindU2(),
 					i => i.MatchLdcI4(TileID.PlanterBox),
 					i => i.MatchBneUn(out label)
 				))
@@ -71,21 +74,23 @@ namespace PlanterBoxLib.Common.Hooks
 				return;
 			}
 
-			c.Index += 7;
+			c.Index += 10;
 			c.RemoveRange(2);
 			c.EmitDelegate(IsPlanterBox);
 			c.Emit(OpCodes.Brfalse, label);
 			#endregion
 
 			#region
-			///	Match:
+			///	tile: Local ID 4
+			/// Match:
 			///		if (tile.active() && tile.type == 380)
 			///	Change to:
 			///		if (tile.active() && IsPlanterBox(tile.type))
 
 			if (!c.TryGotoNext(MoveType.Before,
-					i => i.MatchLdloc(3),
-					i => i.MatchLdfld<Tile>(nameof(Tile.type)),
+					i => i.MatchLdloca(4),
+					i => i.MatchCall(_Tile_get_type),
+					i => i.MatchLdindU2(),
 					i => i.MatchLdcI4(TileID.PlanterBox),
 					i => i.MatchBneUn(out label)
 				))
@@ -94,7 +99,7 @@ namespace PlanterBoxLib.Common.Hooks
 				return;
 			}
 
-			c.Index += 2;
+			c.Index += 3;
 			c.RemoveRange(2);
 			c.EmitDelegate(IsPlanterBox);
 			c.Emit(OpCodes.Brfalse, label);

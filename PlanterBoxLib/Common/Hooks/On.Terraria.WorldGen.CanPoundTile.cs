@@ -9,22 +9,12 @@ namespace PlanterBoxLib.Common.Hooks
 		/// </summary>
 		private bool On_WorldGen_CanPoundTile(On.Terraria.WorldGen.orig_CanPoundTile orig, int x, int y)
 		{
-			if (Main.tile[x, y] == null)
+			if (IsPlanterBox(Main.tile[x, y].TileType))
 			{
-				Main.tile[x, y] = new Tile();
+				return false;
 			}
 
-			if (Main.tile[x, y - 1] == null)
-			{
-				Main.tile[x, y - 1] = new Tile();
-			}
-
-			if (Main.tile[x, y + 1] == null)
-			{
-				Main.tile[x, y + 1] = new Tile();
-			}
-
-			return IsPlanterBox(Main.tile[x, y].type) ? false : orig(x, y);
+			return orig(x, y);
 		}
 	}
 }

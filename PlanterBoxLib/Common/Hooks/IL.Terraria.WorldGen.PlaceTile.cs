@@ -31,7 +31,7 @@ namespace PlanterBoxLib.Common.Hooks
 
 			// The code below patches a segment of PlaceTile() that determines the style of Planter box to place. It is not patched because tModLoader handles this.
 
-			//#region
+			#region
 			/////	V_18: An unnamed variable used in a switch case. Local ID: 18
 			/////	Match:
 			/////		switch (num)
@@ -59,7 +59,7 @@ namespace PlanterBoxLib.Common.Hooks
 			//c.RemoveRange(2);
 			//c.EmitDelegate(IsPlanterBox);
 			//c.Emit(OpCodes.Brtrue_S, label);
-			//#endregion
+			#endregion
 		}
 	}
 }

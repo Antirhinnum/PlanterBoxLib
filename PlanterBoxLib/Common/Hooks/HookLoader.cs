@@ -1,6 +1,7 @@
 ﻿using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
+using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -11,10 +12,13 @@ namespace PlanterBoxLib.Common.Hooks
 	{
 		private const string ILFailMessage = "PlanterBoxLib could not patch {0}.";
 		private static Mod _mod;
+		private static MethodInfo _Tile_get_type;
 
 		public void Load(Mod mod)
 		{
 			_mod = mod;
+			_Tile_get_type = typeof(Tile).GetProperty("type", BindingFlags.Instance | BindingFlags.NonPublic).GetMethod;
+
 			IL.Terraria.GameContent.SmartCursorHelper.Step_AlchemySeeds += SmartCursorHelper_Step_AlchemySeeds;
 			IL.Terraria.GameContent.SmartCursorHelper.Step_PlanterBox += SmartCursorHelper_Step_PlanterBox;
 			IL.Terraria.Player.PlaceThing_Tiles_BlockPlacementForAssortedThings += Player_PlaceThing_Tiles_BlockPlacementForAssortedThings;
@@ -34,6 +38,8 @@ namespace PlanterBoxLib.Common.Hooks
 		public void Unload()
 		{
 			_mod = null;
+			_Tile_get_type = null;
+
 			IL.Terraria.GameContent.SmartCursorHelper.Step_AlchemySeeds -= SmartCursorHelper_Step_AlchemySeeds;
 			IL.Terraria.GameContent.SmartCursorHelper.Step_PlanterBox -= SmartCursorHelper_Step_PlanterBox;
 			IL.Terraria.Player.PlaceThing_Tiles_BlockPlacementForAssortedThings -= Player_PlaceThing_Tiles_BlockPlacementForAssortedThings;
@@ -61,15 +67,15 @@ namespace PlanterBoxLib.Common.Hooks
 		}
 
 		/// <summary>
-		/// Replaces
+		/// Replaces a basic type check for TileID.PlanerBox with one that uses IsPlanterBox().
 		/// </summary>
-		/// <param name="c"></param>
 		/// <param name="expectedValue">Set to true if the IL uses beq.s and false if the IL uses bne.un.s.</param>
 		private static void DoBasicReplacement(ILCursor c, bool expectedValue)
 		{
 			ILLabel label = null;
 			if (!c.TryGotoNext(MoveType.Before,
-					i => i.MatchLdfld<Tile>(nameof(Tile.type)),
+					i => i.MatchCall(_Tile_get_type),
+					i => i.MatchLdindU2(),
 					i => i.MatchLdcI4(TileID.PlanterBox),
 					i => expectedValue ? i.MatchBeq(out label) : i.MatchBneUn(out label)
 				))
@@ -78,7 +84,7 @@ namespace PlanterBoxLib.Common.Hooks
 				return;
 			}
 
-			c.Index += 1;
+			c.Index += 2;
 			c.RemoveRange(2);
 			c.EmitDelegate(IsPlanterBox);
 			c.Emit(expectedValue ? OpCodes.Brtrue_S : OpCodes.Brfalse_S, label);
