@@ -1,5 +1,4 @@
-﻿using Terraria.GameContent.Creative;
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace PlanterBoxLib
@@ -14,7 +13,7 @@ namespace PlanterBoxLib
 		{
 			SafeSetStaticDefaults();
 
-			CreativeItemSacrificesCatalog.Instance.SacrificeCountNeededByItemId[Type] = 25;
+			SacrificeTotal = 25;
 		}
 
 		public override sealed void SetDefaults()

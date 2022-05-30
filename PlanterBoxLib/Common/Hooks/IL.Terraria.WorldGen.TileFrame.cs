@@ -32,7 +32,7 @@ namespace PlanterBoxLib.Common.Hooks
 
 			c.Index += 1;
 			c.RemoveRange(2);
-			c.EmitDelegate(IsPlanterBox);
+			c.EmitDelegate(PlanterBoxLib.IsPlanterBox);
 			c.Emit(OpCodes.Brfalse_S, label);
 		}
 	}

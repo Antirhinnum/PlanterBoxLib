@@ -9,7 +9,7 @@ namespace PlanterBoxLib.Common.Hooks
 		/// </summary>
 		private bool On_WorldGen_CanPoundTile(On.Terraria.WorldGen.orig_CanPoundTile orig, int x, int y)
 		{
-			if (IsPlanterBox(Main.tile[x, y].TileType))
+			if (PlanterBoxLib.IsPlanterBox(Main.tile[x, y].TileType))
 			{
 				return false;
 			}

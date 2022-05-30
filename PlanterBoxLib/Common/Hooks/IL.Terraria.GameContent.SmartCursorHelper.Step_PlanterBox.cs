@@ -45,7 +45,7 @@ namespace PlanterBoxLib.Common.Hooks
 
 			c.Index += 3;                       // Move onto TileID.PlanterBox (380)
 			c.RemoveRange(2);                   // Remove that instruction and the break.
-			c.EmitDelegate(IsPlanterBox);       // Check if the loaded createTile value corresponds to a PLanter Box.
+			c.EmitDelegate(PlanterBoxLib.IsPlanterBox);       // Check if the loaded createTile value corresponds to a Planter Box.
 			c.Emit(OpCodes.Brfalse_S, label);   // Return if it doesn't.
 			#endregion
 
@@ -76,7 +76,7 @@ namespace PlanterBoxLib.Common.Hooks
 
 			c.Index += 10;
 			c.RemoveRange(2);
-			c.EmitDelegate(IsPlanterBox);
+			c.EmitDelegate(PlanterBoxLib.IsPlanterBox);
 			c.Emit(OpCodes.Brfalse, label);
 			#endregion
 
@@ -101,7 +101,7 @@ namespace PlanterBoxLib.Common.Hooks
 
 			c.Index += 3;
 			c.RemoveRange(2);
-			c.EmitDelegate(IsPlanterBox);
+			c.EmitDelegate(PlanterBoxLib.IsPlanterBox);
 			c.Emit(OpCodes.Brfalse, label);
 			#endregion
 		}

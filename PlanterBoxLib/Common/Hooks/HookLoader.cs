@@ -56,11 +56,6 @@ namespace PlanterBoxLib.Common.Hooks
 			On.Terraria.WorldGen.CanCutTile -= On_WorldGen_CanCutTile;
 		}
 
-		private static bool IsPlanterBox(int tileType)
-		{
-			return tileType == TileID.PlanterBox || TileLoader.GetTile(tileType) is ModPlanterBox;
-		}
-
 		private static void DoBasicReplacement(ILContext il, bool expectedValue)
 		{
 			DoBasicReplacement(new ILCursor(il), expectedValue);
@@ -86,7 +81,7 @@ namespace PlanterBoxLib.Common.Hooks
 
 			c.Index += 2;
 			c.RemoveRange(2);
-			c.EmitDelegate(IsPlanterBox);
+			c.EmitDelegate(PlanterBoxLib.IsPlanterBox);
 			c.Emit(expectedValue ? OpCodes.Brtrue_S : OpCodes.Brfalse_S, label);
 		}
 

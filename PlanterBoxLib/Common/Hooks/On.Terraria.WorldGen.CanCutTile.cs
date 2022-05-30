@@ -9,7 +9,7 @@ namespace PlanterBoxLib.Common.Hooks
 		/// </summary>
 		private bool On_WorldGen_CanCutTile(On.Terraria.WorldGen.orig_CanCutTile orig, int x, int y, Terraria.Enums.TileCuttingContext context)
 		{
-			if (IsPlanterBox(Main.tile[x, y + 1].TileType))
+			if (PlanterBoxLib.IsPlanterBox(Main.tile[x, y + 1].TileType))
 			{
 				return false;
 			}

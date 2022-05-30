@@ -4,6 +4,13 @@ This mod adds no content on its own and is intended to be used by other mods.
 An example of using this mod is included on the mod's GitHub.
 Please create issues on the mod's GitHub if you would like new features.
 
+Call Methods:
+See https://github.com/tModLoader/tModLoader/wiki/Expert-Cross-Mod-Content#call-aka-modcall-intermediate for how to use Mod.Call().
+
+Method:
+	 mod.Call("IsPlanterBoxCheck", int tileType)
+	 Returns true if the tileType provided is TileID.PlanterBox (380) or is the associated ModTile derives from ModPlanterBox.
+
 Changelog:
  - 1.0.0.0: Release
- - 1.0.0.1: Update to 
+ - 1.0.1.0: Update for tModLoader's May freeze. Added a call method to check if a tile is a planter box.
